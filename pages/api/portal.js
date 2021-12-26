@@ -11,6 +11,7 @@ const handler = async (req, res) => {
 
   const token = cookie.parse(req.headers.cookie)["sb:token"];
 
+  // Assign access_token for RLS
   supabase.auth.session = () => ({
     access_token: token,
   });
@@ -35,4 +36,9 @@ const handler = async (req, res) => {
   });
 };
 
+/**
+ * Let users manage subscriptions on Stripe portal. Similar to [priceId].js API
+ * - Get the user's stripe customer id from supabase
+ * - Open a Stripe portal session 
+ */
 export default handler;

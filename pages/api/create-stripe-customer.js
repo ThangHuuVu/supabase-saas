@@ -11,6 +11,7 @@ const handler = async (req, res) => {
     email: req.body.record.email,
   });
 
+  // Bypass RLS
   const supabase = getServiceSupabase();
 
   await supabase
@@ -23,4 +24,9 @@ const handler = async (req, res) => {
   res.send({ message: `stripe customer created: ${customer.id}` });
 };
 
+/**
+ * Supabase Function hook API. Called when a user signs up.
+ * - Create a Stripe customer on Stripe
+ * - Update stripe_customer in profile table
+ */
 export default handler;

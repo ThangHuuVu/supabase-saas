@@ -19,6 +19,7 @@ const handler = async (req, res) => {
     return res.status(400).send(`Webhook error: ${error.message}`);
   }
 
+  // Bypass RLS
   const supabase = getServiceSupabase();
 
   switch (event.type) {
@@ -47,4 +48,7 @@ const handler = async (req, res) => {
   res.send({ received: true });
 };
 
+/**
+ * Stripe webhooks API. Called by Stripe when a subscription is updated.
+ */
 export default handler;

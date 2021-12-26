@@ -10,6 +10,7 @@ const Provider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
+  // Populate user state with profiles.
   useEffect(() => {
     const getUserProfile = async () => {
       const sessionUser = supabase.auth.user();
@@ -37,6 +38,7 @@ const Provider = ({ children }) => {
     });
   }, []);
 
+  // Set cookies when user signs in / out
   useEffect(() => {
     axios.post("/api/set-supabase-cookie", {
       event: user ? "SIGNED_IN" : "SIGNED_OUT",
@@ -44,6 +46,7 @@ const Provider = ({ children }) => {
     });
   }, [user]);
 
+  // Supabase Real-Time feature to listen to changes in subscriptions
   useEffect(() => {
     if (user) {
       const subscription = supabase

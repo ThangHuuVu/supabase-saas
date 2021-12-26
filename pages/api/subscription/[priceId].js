@@ -48,4 +48,9 @@ const handler = async (req, res) => {
   });
 };
 
+/**
+ * Subscription API. Called when a user clicks on a subscription button.
+ * - Get the user's stripe customer id from supabase
+ * - Open a Stripe checkout session 
+ */
 export default handler;
